@@ -1,0 +1,32 @@
+micronaut:
+  security:
+    enabled: true
+    redirect:
+      login-success: /security/success
+      login-failure: /security/failure
+    authentication: session
+  application:
+    name: server
+  session:
+    http:
+      cookie: true
+      header: true
+datasources:
+  default:
+    driver-class-name: org.postgresql.Driver
+    db-type: postgres
+    dialect: POSTGRES
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+flyway:
+  datasources:
+    default:
+      enabled: true
+jpa:
+  default:
+    properties:
+      hibernate:    
+        hbm2ddl:
+          auto: none
+jpa.default.properties.hibernate.hbm2ddl.auto: none

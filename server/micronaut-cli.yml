@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.andreiverse.demo
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [app-name, data, data-jpa, hibernate-jpa, hibernate-validator, http-client-test, http-session, java, java-application, jdbc-hikari, jul-to-slf4j, junit, liquibase, logback, lombok, maven, maven-enforcer-plugin, micronaut-aot, micronaut-http-validation, micronaut-processing-compiler-args, netty-server, openapi, postgres, readme, serialization-jackson, shade, static-resources, test-resources, yaml, yaml-build]

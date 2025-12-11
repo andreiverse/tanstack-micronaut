@@ -1,0 +1,12 @@
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+datasources:
+  default:
+    driver-class-name: org.h2.Driver
+    db-type: h2
+    dialect: H2
+    url: jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
