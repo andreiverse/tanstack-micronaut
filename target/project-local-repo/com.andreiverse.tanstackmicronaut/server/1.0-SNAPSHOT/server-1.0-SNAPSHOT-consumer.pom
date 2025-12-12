@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>server</artifactId>
-  <packaging>${packaging}</packaging>
-
   <parent>
     <groupId>com.andreiverse.tanstackmicronaut</groupId>
     <artifactId>tanstackmicronaut</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-
+  <artifactId>server</artifactId>
+  <packaging>${packaging}</packaging>
   <properties>
     <packaging>jar</packaging>
     <jdk.version>25</jdk.version>
@@ -23,21 +20,12 @@
     <micronaut.runtime>netty</micronaut.runtime>
     <exec.mainClass>com.andreiverse.demo.Application</exec.mainClass>
   </properties>
-
-  <repositories>
-    <repository>
-      <id>central</id>
-      <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
-  </repositories>
-
   <dependencies>
     <dependency>
       <groupId>com.andreiverse.tanstackmicronaut</groupId>
       <artifactId>database</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
-
     <dependency>
       <groupId>io.micronaut.security</groupId>
       <artifactId>micronaut-security</artifactId>
@@ -123,11 +111,6 @@
       <artifactId>micronaut-openapi-annotations</artifactId>
       <scope>provided</scope>
     </dependency>
-    <!-- <dependency>
-      <groupId>io.micronaut.testresources</groupId>
-      <artifactId>micronaut-test-resources-client</artifactId>
-      <scope>provided</scope>
-    </dependency> -->
     <dependency>
       <groupId>io.swagger.core.v3</groupId>
       <artifactId>swagger-annotations</artifactId>
@@ -165,6 +148,12 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <repositories>
+    <repository>
+      <id>central</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+  </repositories>
   <build>
     <plugins>
       <plugin>
@@ -175,16 +164,11 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <!-- Uncomment to enable incremental compilation -->
-          <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-
           <annotationProcessorPaths combine.self="override">
             <path>
               <groupId>org.projectlombok</groupId>
@@ -251,24 +235,23 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.6.2</version>
         <executions>
-            <execution>
-                <id>generate-client-types</id>
-                <phase>process-classes</phase>
-                <goals>
-                    <goal>exec</goal>
-                </goals>
-                <configuration>
-                    <executable>pnpm</executable>
-                    <workingDirectory>${project.parent.basedir}/client</workingDirectory>
-                    <arguments>
-                        <argument>run</argument>
-                        <argument>generate-types</argument>
-                    </arguments>
-                </configuration>
-            </execution>
+          <execution>
+            <id>generate-client-types</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>pnpm</executable>
+              <workingDirectory>${project.parent.basedir}/client</workingDirectory>
+              <arguments>
+                <argument>run</argument>
+                <argument>generate-types</argument>
+              </arguments>
+            </configuration>
+          </execution>
         </executions>
-    </plugin>
+      </plugin>
     </plugins>
   </build>
-
 </project>
