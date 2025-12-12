@@ -7,7 +7,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "generate-types": "pnpm dlx openapi-typescript ../server/target/classes/META-INF/swagger/server-0.0.yml -o ./src/lib/api/v1.d.ts"
+    "production": "node .output/server/index.mjs",
+    "generate-types": "pnpm dlx openapi-typescript ../server/target/classes/META-INF/swagger/server-1.0.0.yml -o ./src/lib/api/v1.d.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -23,6 +24,8 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.544.0",
     "nitro": "latest",
+    "openapi-fetch": "^0.15.0",
+    "openapi-react-query": "^0.5.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwind-merge": "^3.0.2",
@@ -40,6 +43,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "^1.0.0",
     "jsdom": "^27.0.0",
+    "openapi-typescript": "^7.10.1",
     "typescript": "^5.7.2",
     "vite": "^7.1.7",
     "vitest": "^3.0.5",

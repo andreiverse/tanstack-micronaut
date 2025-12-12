@@ -7,10 +7,20 @@ micronaut:
     authentication: session
   application:
     name: server
+  cache:
+    redis:
+      enabled: true
   session:
     http:
-      cookie: true
-      header: true
+      redis:
+        enabled: true
+        namespace: 'micronaut:session'
+        write-mode: BACKGROUND
+  serde:
+    serialization:
+      inclusion: ALWAYS
+redis:
+  uri: redis://localhost:6379
 datasources:
   default:
     driver-class-name: org.postgresql.Driver

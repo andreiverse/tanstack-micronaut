@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 @Serializable
 public class ApiErrorResponse {
+    private final String exception;
     private final String message;
 }

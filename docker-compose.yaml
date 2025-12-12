@@ -1,10 +1,35 @@
 services:
   database:
     image: postgres:16-alpine
-    container_name: postgres
+    container_name: tanstack-postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
+    networks:
+      - tanstack-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: tanstack-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - tanstack-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: redis-server --appendonly yes
+
+networks:
+  tanstack-network:
+    driver: bridge

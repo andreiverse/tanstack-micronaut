@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.andreiverse.demo.domain.UserRegistrationRequest;
 import com.andreiverse.demo.entity.UserEntity;
 import com.andreiverse.demo.repository.UserRepository;
+import com.andreiverse.demo.security.PasswordEncoder;
 
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Optional<UserEntity> findById(UUID id) {
         return userRepository.findById(id);
@@ -28,7 +30,7 @@ public class UserService {
         UserEntity userEntity = new UserEntity();
 
         userEntity.setEmail(userRegistrationRequest.getEmail());
-        userEntity.setHashedPassword(userRegistrationRequest.getPassword());
+        userEntity.setHashedPassword(passwordEncoder.encode(userRegistrationRequest.getPassword()));
 
         return userRepository.save(userEntity);
     }

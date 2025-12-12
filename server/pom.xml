@@ -39,6 +39,12 @@
     </dependency>
 
     <dependency>
+        <groupId>org.mindrot</groupId>
+        <artifactId>jbcrypt</artifactId>
+        <version>0.4</version>
+    </dependency>
+
+    <dependency>
       <groupId>io.micronaut.security</groupId>
       <artifactId>micronaut-security</artifactId>
     </dependency>
@@ -86,6 +92,11 @@
     <dependency>
       <groupId>io.micronaut.session</groupId>
       <artifactId>micronaut-session</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut.redis</groupId>
+      <artifactId>micronaut-redis-lettuce</artifactId>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -172,6 +183,7 @@
         <artifactId>micronaut-maven-plugin</artifactId>
         <configuration>
           <configFile>aot-${packaging}.properties</configFile>
+          <testResourcesVersion>${micronaut.test.resources.version}</testResourcesVersion>
         </configuration>
       </plugin>
       <plugin>
