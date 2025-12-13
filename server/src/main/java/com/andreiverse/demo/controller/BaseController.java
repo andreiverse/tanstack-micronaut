@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import com.andreiverse.demo.domain.ApiErrorResponse;
 
 @ApiResponses(value = {
-                @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
+        @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
 })
 public class BaseController {
 

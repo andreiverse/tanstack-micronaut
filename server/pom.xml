@@ -182,6 +182,7 @@
         <groupId>io.micronaut.maven</groupId>
         <artifactId>micronaut-maven-plugin</artifactId>
         <configuration>
+          <watchForChanges>false</watchForChanges>
           <configFile>aot-${packaging}.properties</configFile>
           <testResourcesVersion>${micronaut.test.resources.version}</testResourcesVersion>
         </configuration>

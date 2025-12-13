@@ -1,9 +1,18 @@
+micronaut:
+  cache:
+    redis:
+      enabled: false
+  session:
+    http:
+      redis:
+        enabled: false
 jpa:
   default:
     properties:
       hibernate:
         hbm2ddl:
           auto: none
+
 datasources:
   default:
     driver-class-name: org.h2.Driver

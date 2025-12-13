@@ -1,10 +1,24 @@
 micronaut:
+  server:
+    cors:
+      enabled: true
+      configurations:
+        ui:
+          allowed-origins: "http://localhost:3000"
   security:
+    intercept-url-map:
+      - pattern: "/**"
+        http-method: OPTIONS
+        access:
+          - isAnonymous()
     enabled: true
     redirect:
       login-success: /security/success
       login-failure: /security/failure
+      logout: /security/failure
     authentication: session
+    basic-auth:
+      enabled: false
   application:
     name: server
   cache:
