@@ -3,8 +3,7 @@ Thumbs.db
 .gradle
 build/
 target/
-!target/classes/META-INF/swagger
-out/
+!target/classes/META-INF/swagger/*.yml
 .micronaut/
 .idea
 *.iml

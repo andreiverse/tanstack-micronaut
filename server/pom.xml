@@ -175,7 +175,25 @@
       <artifactId>h2</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.andreiverse.tanstackmicronaut</groupId>
+      <artifactId>common</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
   </dependencies>
+  
+  <dependencyManagement>
+    <dependencies>
+        <dependency>
+          <groupId>io.micronaut.platform</groupId>
+          <artifactId>micronaut-parent</artifactId>
+          <version>4.10.3</version>
+          <type>pom</type>
+          <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <build>
     <plugins>
       <plugin>
@@ -256,6 +274,8 @@
           <compilerArgs>
             <arg>-Amicronaut.processing.group=com.andreiverse.demo</arg>
             <arg>-Amicronaut.processing.module=server</arg>
+            <arg>-Amicronaut.openapi.filename=server-1.0.0</arg>
+            <arg>-Amicronaut.openapi.additional.files=../common/target/classes/META-INF/swagger/common-1.0.0.yml</arg>
           </compilerArgs>
         </configuration>
       </plugin>
@@ -272,7 +292,7 @@
                 </goals>
                 <configuration>
                     <executable>pnpm</executable>
-                    <workingDirectory>${project.parent.basedir}/client</workingDirectory>
+                    <workingDirectory>${project.parent.basedir}/frontend/apps/client</workingDirectory>
                     <arguments>
                         <argument>run</argument>
                         <argument>generate-types</argument>
