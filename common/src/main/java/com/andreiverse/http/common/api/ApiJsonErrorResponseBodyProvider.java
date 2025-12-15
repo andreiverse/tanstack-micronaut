@@ -1,8 +1,8 @@
-package com.andreiverse.demo.api;
+package com.andreiverse.http.common.api;
 
 import java.util.Optional;
 
-import com.andreiverse.demo.domain.ApiErrorResponse;
+import com.andreiverse.http.common.domain.ApiErrorResponse;
 
 import io.micronaut.context.annotation.Replaces;
 import io.micronaut.core.annotation.NonNull;

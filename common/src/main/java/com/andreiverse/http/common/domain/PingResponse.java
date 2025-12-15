@@ -1,4 +1,4 @@
-package com.andreiverse.demo.domain;
+package com.andreiverse.http.common.domain;
 
 import java.time.Instant;
 

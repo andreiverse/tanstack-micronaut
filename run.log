@@ -1,0 +1,113 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/home/d4rck/.sdkman/candidates/maven/current/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.andreiverse.tanstackmicronaut:common:jar:1.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 202, column 15
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-enforcer-plugin is missing. @ line 198, column 15
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.andreiverse.tanstackmicronaut:server:jar:1.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 212, column 15
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-enforcer-plugin is missing. @ line 208, column 15
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] tanstackmicronaut                                                  [pom]
+[INFO] database                                                           [jar]
+[INFO] common                                                             [jar]
+[INFO] server                                                             [jar]
+[INFO] client                                                             [pom]
+[INFO] 
+[INFO] --------< com.andreiverse.tanstackmicronaut:tanstackmicronaut >---------
+[INFO] Building tanstackmicronaut 1.0-SNAPSHOT                            [1/5]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] >>> mn:4.11.4:run (default-cli) > process-classes @ tanstackmicronaut >>>
+[INFO] 
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] Forking database 1.0-SNAPSHOT
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ database ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ database ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] Forking common 1.0-SNAPSHOT
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/d4rck/tanstack-micronaut/common/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] Forking server 1.0-SNAPSHOT
+[INFO] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ server ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ server ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.6.2:exec (generate-client-types) @ server ---
+
+> client@ generate-types /home/d4rck/tanstack-micronaut/frontend/apps/client
+> pnpm dlx openapi-typescript ../../../server/target/classes/META-INF/swagger/server-1.0.0.yml -o ./src/lib/api/v1.d.ts
+
+✨ openapi-typescript 7.10.1
+🚀 ../../../server/target/classes/META-INF/swagger/server-1.0.0.yml → ./src/lib/api/v1.d.ts [39.3ms]
+[INFO] 
+[INFO] <<< mn:4.11.4:run (default-cli) < process-classes @ tanstackmicronaut <<<
+[INFO] 
+[INFO] 
+[INFO] --- mn:4.11.4:run (default-cli) @ tanstackmicronaut ---
+[INFO] Running project server
+[ERROR] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+[ERROR] WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/home/d4rck/.sdkman/candidates/maven/3.9.11/lib/guice-5.1.0-classes.jar)
+[ERROR] WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+[ERROR] WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+ __  __ _                                  _   
+|  \/  (_) ___ _ __ ___  _ __   __ _ _   _| |_ 
+| |\/| | |/ __| '__/ _ \| '_ \ / _` | | | | __|
+| |  | | | (__| | | (_) | | | | (_| | |_| | |_ 
+|_|  |_|_|\___|_|  \___/|_| |_|\__,_|\__,_|\__|
+[36m22:31:49.233[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mo.h.validator.internal.util.Version[0;39m - HV000001: Hibernate Validator 8.0.2.Final
+[36m22:31:49.384[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 6.6.32.Final
+[36m22:31:49.415[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Starting...
+[36m22:31:49.585[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mcom.zaxxer.hikari.pool.HikariPool[0;39m - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6272c96f
+[36m22:31:49.587[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Start completed.
+[36m22:31:49.764[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mi.m.flyway.AbstractFlywayMigration[0;39m - Running migrations for database with qualifier [default]
+[36m22:31:49.794[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35morg.flywaydb.core.FlywayExecutor[0;39m - Database: jdbc:postgresql://localhost:5432/postgres (PostgreSQL 16.11)
+[36m22:31:49.836[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mo.f.core.internal.command.DbValidate[0;39m - Successfully validated 2 migrations (execution time 00:00.019s)
+[36m22:31:49.853[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mo.f.core.internal.command.DbMigrate[0;39m - Current version of schema "public": 2
+[36m22:31:49.856[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mo.f.core.internal.command.DbMigrate[0;39m - Schema "public" is up to date. No migration necessary.
+[36m22:31:49.901[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mo.h.c.i.RegionFactoryInitiator[0;39m - HHH000026: Second-level cache disabled
+[36m22:31:50.030[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mo.hibernate.orm.connections.pooling[0;39m - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.11
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+[36m22:31:51.099[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mc.a.h.c.s.p.PermissionSeeder[0;39m - Seeding permissions: [TEST]
+[36m22:31:52.460[0;39m [1;30m[main][0;39m [34mINFO [0;39m [35mio.micronaut.runtime.Micronaut[0;39m - Startup completed in 3634ms. Server Running: http://localhost:8080
+[36m22:33:23.176[0;39m [1;30m[Thread-0][0;39m [34mINFO [0;39m [35mio.micronaut.runtime.Micronaut[0;39m - Embedded Application shutting down
+[36m22:33:23.205[0;39m [1;30m[Thread-0][0;39m [34mINFO [0;39m [35mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown initiated...
+[36m22:33:23.208[0;39m [1;30m[Thread-0][0;39m [34mINFO [0;39m [35mcom.zaxxer.hikari.HikariDataSource[0;39m - HikariPool-1 - Shutdown completed.

@@ -1,12 +1,12 @@
-package com.andreiverse.demo.service;
+package com.andreiverse.http.common.service;
 
 import java.util.Optional;
 import java.util.UUID;
 
-import com.andreiverse.demo.domain.UserRegistrationRequest;
-import com.andreiverse.demo.entity.UserEntity;
-import com.andreiverse.demo.repository.UserRepository;
-import com.andreiverse.demo.security.PasswordEncoder;
+import com.andreiverse.http.common.domain.UserRegistrationRequest;
+import com.andreiverse.http.common.entity.UserEntity;
+import com.andreiverse.http.common.repository.UserRepository;
+import com.andreiverse.http.common.security.PasswordEncoder;
 
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;

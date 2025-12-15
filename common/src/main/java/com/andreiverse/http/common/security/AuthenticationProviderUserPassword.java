@@ -1,4 +1,4 @@
-package com.andreiverse.demo.security;
+package com.andreiverse.http.common.security;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
@@ -14,8 +14,8 @@ import java.util.Optional;
 
 import org.reactivestreams.Publisher;
 
-import com.andreiverse.demo.entity.UserEntity;
-import com.andreiverse.demo.service.UserService;
+import com.andreiverse.http.common.entity.UserEntity;
+import com.andreiverse.http.common.service.UserService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;

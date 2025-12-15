@@ -1,6 +1,6 @@
-package com.andreiverse.demo.controller;
+package com.andreiverse.http.common.controller;
 
-import com.andreiverse.demo.domain.PingResponse;
+import com.andreiverse.http.common.domain.PingResponse;
 
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;

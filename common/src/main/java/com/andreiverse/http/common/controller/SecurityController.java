@@ -1,4 +1,4 @@
-package com.andreiverse.demo.controller;
+package com.andreiverse.http.common.controller;
 
 import java.util.Map;
 

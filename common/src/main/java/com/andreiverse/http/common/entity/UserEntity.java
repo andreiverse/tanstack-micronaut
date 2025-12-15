@@ -1,4 +1,4 @@
-package com.andreiverse.demo.entity;
+package com.andreiverse.http.common.entity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

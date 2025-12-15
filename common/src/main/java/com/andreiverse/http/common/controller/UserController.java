@@ -1,8 +1,8 @@
-package com.andreiverse.demo.controller;
+package com.andreiverse.http.common.controller;
 
-import com.andreiverse.demo.domain.UserRegistrationRequest;
-import com.andreiverse.demo.entity.UserEntity;
-import com.andreiverse.demo.service.UserService;
+import com.andreiverse.http.common.domain.UserRegistrationRequest;
+import com.andreiverse.http.common.entity.UserEntity;
+import com.andreiverse.http.common.service.UserService;
 
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;

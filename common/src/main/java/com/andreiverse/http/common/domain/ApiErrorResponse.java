@@ -1,4 +1,4 @@
-package com.andreiverse.demo.domain;
+package com.andreiverse.http.common.domain;
 
 import io.micronaut.serde.annotation.Serdeable.Serializable;
 import jakarta.validation.constraints.NotNull;
