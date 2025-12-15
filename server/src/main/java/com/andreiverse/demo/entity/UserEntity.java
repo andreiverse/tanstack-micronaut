@@ -33,14 +33,17 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, updatable = false)
+    // can be null before creation
     private UUID id;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
+    @NotNull
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
+    @NotNull
     private LocalDateTime updatedAt;
 
     @Column(name = "email", unique = true, nullable = false)

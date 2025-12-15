@@ -1,5 +1,7 @@
 package com.andreiverse.demo.api;
 
+import java.util.Optional;
+
 import com.andreiverse.demo.domain.ApiErrorResponse;
 
 import io.micronaut.context.annotation.Replaces;
@@ -18,7 +20,7 @@ public class ApiJsonErrorResponseBodyProvider implements JsonErrorResponseBodyPr
     @Override
     public @NonNull ApiErrorResponse body(@NonNull ErrorContext ctx, @NonNull HttpResponse<?> response) {
         return new ApiErrorResponse(ctx.getRootCause().get().getClass().getName(),
-                ctx.getRootCause().get().getMessage());
+                Optional.ofNullable(ctx.getRootCause().get().getMessage()).orElse("<empty>"));
     }
 
 }

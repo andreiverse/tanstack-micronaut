@@ -4,29 +4,24 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import $api from '@/lib/api/client';
 import { createFileRoute } from '@tanstack/react-router'
-import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useLogout } from '@/lib/api/mutation';
 
 export const Route = createFileRoute('/login')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
-    const queryClient = useQueryClient();
+    const { logout } = useLogout();
     const currentUser = $api.useQuery("get", "/users/current");
-    const logoutMutation = $api.useMutation("post", "/security/logout");
 
     const [tab, setTab] = useState<"login" | "register">("login");
 
     if (currentUser.isSuccess) {
         return <>
-            <p>Logged in as {currentUser.data?.email}</p>
+            <p>Logged in as {currentUser.data.email}</p>
             <Button onClick={async () => {
-                await logoutMutation.mutateAsync({});
-                // Clear the current user query data to prevent stale data after 401
-                queryClient.resetQueries(
-                    $api.queryOptions("get", "/users/current")
-                );
+                await logout();
             }}>Logout</Button>
         </>
     }

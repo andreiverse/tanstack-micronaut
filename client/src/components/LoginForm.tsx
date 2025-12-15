@@ -3,6 +3,7 @@ import $api from "../lib/api/client";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 export default function LoginForm() {
     const currentUser = $api.useQuery("get", "/users/current");
@@ -21,7 +22,12 @@ export default function LoginForm() {
                 body: {
                     username: email, password
                 }
-            }).then(currentUser.refetch);
+            }).then(() => {
+                toast.success("Logged in successfully");
+                currentUser.refetch();
+            }).catch(() => {
+                toast.error("Wrong credentials");
+            });
         }}>Login</Button>
     </div>
 }

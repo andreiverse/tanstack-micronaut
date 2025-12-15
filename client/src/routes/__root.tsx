@@ -1,5 +1,6 @@
 import {
   HeadContent,
+  Router,
   Scripts,
   createRootRouteWithContext,
 } from '@tanstack/react-router'
@@ -11,12 +12,28 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
+import { Toaster } from '@/components/ui/sonner'
+import { components } from '@/lib/api/v1'
+import { fetchCurrentUserInfo } from '@/functions/auth'
+import $api from '@/lib/api/client'
 
 interface MyRouterContext {
-  queryClient: QueryClient
+  queryClient: QueryClient,
+  user: components["schemas"]["UserEntity"] | null
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+  beforeLoad: async ({ context }) => {
+    const user = await fetchCurrentUserInfo()
+
+    if (user) {
+      context.queryClient.setQueryData($api.queryOptions("get", "/users/current").queryKey, user)
+    }
+
+    return {
+      user
+    }
+  },
   head: () => ({
     meta: [
       {
@@ -42,6 +59,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+
   return (
     <html lang="en">
       <head>
@@ -51,6 +69,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <main className="max-w-2xl mx-auto mt-5">
           {children}
         </main>
+        <Toaster />
         <TanStackDevtools
           config={{
             position: 'bottom-right',

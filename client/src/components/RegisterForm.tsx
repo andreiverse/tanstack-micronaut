@@ -3,6 +3,7 @@ import $api from "../lib/api/client";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 export default function RegisterForm({ onRegister }: { onRegister: () => void }) {
     const registerMutation = $api.useMutation("post", "/users");
@@ -20,7 +21,12 @@ export default function RegisterForm({ onRegister }: { onRegister: () => void })
                 body: {
                     email, password
                 }
-            }).then(onRegister);
+            }).then(() => {
+                toast.success("Registered successfully");
+                onRegister();
+            }).catch((error) => {
+                toast.error("Failed to register: " + error.message);
+            });
         }}>Register</Button>
     </div>
 }

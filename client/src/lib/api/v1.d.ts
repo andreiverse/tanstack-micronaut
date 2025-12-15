@@ -157,7 +157,6 @@ export interface components {
         UserRegistrationRequest: {
             email?: string;
             password?: string;
-            testFields?: string;
         };
         UsernamePasswordCredentials: {
             username: string | null;
@@ -277,16 +276,12 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description failureAuthentication 200 response */
-            200: {
+            /** @description failureAuthentication 401 response */
+            401: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content: {
-                    "application/json": {
-                        [key: string]: Record<string, never>;
-                    };
-                };
+                content?: never;
             };
             /** @description Internal Server Error */
             500: {
