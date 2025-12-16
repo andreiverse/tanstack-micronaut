@@ -140,10 +140,19 @@ export interface components {
             exception: string;
             message: string;
         };
+        PermissionEntity: {
+            name: string;
+        };
         PingResponse: {
             ok: boolean;
             /** Format: date-time */
             timestamp: string;
+        };
+        RoleEntity: {
+            /** Format: uuid */
+            id?: string | null;
+            name?: string;
+            permissions?: components["schemas"]["PermissionEntity"][];
         };
         UserEntity: {
             /** Format: uuid */
@@ -153,6 +162,7 @@ export interface components {
             /** Format: date-time */
             updatedAt: string;
             email: string;
+            roles: components["schemas"]["RoleEntity"][];
         };
         UserRegistrationRequest: {
             email?: string;

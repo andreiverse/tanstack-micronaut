@@ -1,6 +1,7 @@
 package com.andreiverse.http.common;
 
-import com.andreiverse.http.common.security.permission.PermissionSeeder;
+import com.andreiverse.http.common.security.authorization.PermissionSeeder;
+
 import io.micronaut.context.event.StartupEvent;
 
 import jakarta.inject.Singleton;

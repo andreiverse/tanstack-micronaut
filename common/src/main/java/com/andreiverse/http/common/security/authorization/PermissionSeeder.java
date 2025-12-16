@@ -1,4 +1,4 @@
-package com.andreiverse.http.common.security.permission;
+package com.andreiverse.http.common.security.authorization;
 
 import java.util.List;
 

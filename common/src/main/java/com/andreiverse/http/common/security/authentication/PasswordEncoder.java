@@ -1,4 +1,4 @@
-package com.andreiverse.http.common.security;
+package com.andreiverse.http.common.security.authentication;
 
 public interface PasswordEncoder {
     String encode(String plain);

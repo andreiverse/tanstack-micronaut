@@ -1,4 +1,4 @@
-package com.andreiverse.http.common.security;
+package com.andreiverse.http.common.security.authentication;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
@@ -37,7 +37,25 @@ public class AuthenticationProviderUserPassword<B> implements HttpRequestReactiv
             if (userEntityOptional.isPresent()) {
                 UserEntity userEntity = userEntityOptional.get();
                 if (passwordEncoder.matches(authenticationRequest.getSecret(), userEntity.getHashedPassword())) {
-                    emitter.next(AuthenticationResponse.success((String) authenticationRequest.getIdentity()));
+                    // Flatten Roles and Permissions into a single list of strings
+                    java.util.List<String> authorities = new java.util.ArrayList<>();
+
+                    if (userEntity.getRoles() != null) {
+                        for (com.andreiverse.http.common.entity.RoleEntity role : userEntity.getRoles()) {
+                            // Add Role Name (e.g. "ROLE_ADMIN")
+                            authorities.add("ROLE_" + role.getName()); // Standard convention, but customizable
+
+                            // Add Permissions (e.g. "ARTICLE_WRITE")
+                            if (role.getPermissions() != null) {
+                                for (com.andreiverse.http.common.entity.PermissionEntity perm : role.getPermissions()) {
+                                    authorities.add(perm.getName());
+                                }
+                            }
+                        }
+                    }
+
+                    emitter.next(
+                            AuthenticationResponse.success((String) authenticationRequest.getIdentity(), authorities));
                     emitter.complete();
                 } else {
                     emitter.error(AuthenticationResponse.exception());

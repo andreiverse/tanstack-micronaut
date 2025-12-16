@@ -1,4 +1,4 @@
-package com.andreiverse.http.common.security;
+package com.andreiverse.http.common.security.authentication;
 
 import org.mindrot.jbcrypt.BCrypt;
 

@@ -37,7 +37,7 @@ public class SecurityController extends BaseController {
         throw new AuthorizationException(null);
     }
 
-    @Post("/logout")
+    @Post("logout")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public Map<String, Object> logout(HttpRequest<?> request, Session session) {
         // this actually deletes the session, but it keeps the cookie until the user
