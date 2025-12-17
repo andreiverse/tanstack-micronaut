@@ -4,6 +4,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import com.andreiverse.http.common.entity.BaseUserDetailsEntity;
 
+import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Serdeable
 public class UserDetailsEntity extends BaseUserDetailsEntity {
 
     @Column(name = "description", nullable = false)

@@ -4,6 +4,22 @@
  */
 
 export interface paths {
+    "/details/current": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getCurrentUserDetails"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/login": {
         parameters: {
             query?: never;
@@ -140,6 +156,10 @@ export interface components {
             exception: string;
             message: string;
         };
+        BaseUserDetailsEntity: {
+            /** Format: uuid */
+            userId?: string;
+        };
         PermissionEntity: {
             name: string;
         };
@@ -153,6 +173,9 @@ export interface components {
             id?: string | null;
             name?: string;
             permissions?: components["schemas"]["PermissionEntity"][];
+        };
+        UserDetailsEntity: components["schemas"]["BaseUserDetailsEntity"] & {
+            description?: string;
         };
         UserEntity: {
             /** Format: uuid */
@@ -183,6 +206,26 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    getCurrentUserDetails: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description getCurrentUserDetails 200 response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserDetailsEntity"];
+                };
+            };
+        };
+    };
     login: {
         parameters: {
             query?: never;

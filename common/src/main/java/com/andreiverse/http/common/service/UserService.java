@@ -10,7 +10,7 @@ import com.andreiverse.http.common.entity.RoleEntity;
 import com.andreiverse.http.common.entity.UserEntity;
 import com.andreiverse.http.common.repository.RoleRepository;
 import com.andreiverse.http.common.repository.UserRepository;
-import com.andreiverse.http.common.security.IUserDetailsService;
+import com.andreiverse.http.common.security.AbstractUserDetailsService;
 import com.andreiverse.http.common.security.authentication.PasswordEncoder;
 import com.andreiverse.http.common.security.authorization.Role;
 
@@ -26,7 +26,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final Optional<IUserDetailsService<?>> userDetailsService;
+    private final Optional<AbstractUserDetailsService<?>> userDetailsService;
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;

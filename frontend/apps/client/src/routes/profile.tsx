@@ -16,6 +16,8 @@ function RouteComponent() {
 
   const { logout } = useLogout();
   const currentUser = $api.useQuery("get", "/users/current");
+  const currentUserDetails = $api.useQuery("get", "/details/current")
+
 
   const [tab, setTab] = useState<"login" | "register">("login");
 
@@ -26,6 +28,7 @@ function RouteComponent() {
       <Button onClick={async () => {
         await logout();
       }}>Logout</Button>
+      <p>Details: {currentUserDetails.data?.description}</p>
     </>
   }
 
