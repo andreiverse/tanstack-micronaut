@@ -20,4 +20,6 @@ public interface UserDetailsRepository<T extends BaseUserDetailsEntity> extends 
      * findById.
      */
     Optional<T> findByUserId(UUID userId);
+
+    void deleteByUserId(UUID userId);
 }

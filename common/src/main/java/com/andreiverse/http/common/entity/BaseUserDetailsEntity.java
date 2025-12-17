@@ -26,7 +26,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Serdeable
 public abstract class BaseUserDetailsEntity {
-
     @Id
     private UUID userId;
 

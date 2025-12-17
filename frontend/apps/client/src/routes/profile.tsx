@@ -12,12 +12,9 @@ export const Route = createFileRoute('/profile')({
 })
 
 function RouteComponent() {
-
-
   const { logout } = useLogout();
   const currentUser = $api.useQuery("get", "/users/current");
   const currentUserDetails = $api.useQuery("get", "/details/current")
-
 
   const [tab, setTab] = useState<"login" | "register">("login");
 

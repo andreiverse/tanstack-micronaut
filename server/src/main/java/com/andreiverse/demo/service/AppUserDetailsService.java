@@ -3,7 +3,7 @@ package com.andreiverse.demo.service;
 import com.andreiverse.demo.entity.UserDetailsEntity;
 import com.andreiverse.demo.repository.AppUserDetailsRepository;
 import com.andreiverse.http.common.entity.UserEntity;
-import com.andreiverse.http.common.security.AbstractUserDetailsService;
+import com.andreiverse.http.common.service.AbstractUserDetailsService;
 
 import jakarta.persistence.EntityManager;
 import jakarta.inject.Singleton;

@@ -4,9 +4,11 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginForm() {
-    const currentUser = $api.useQuery("get", "/users/current");
+    const qc = useQueryClient();
+
     const loginMutation = $api.useMutation("post", "/login");
 
     const [email, setEmail] = useState("");
@@ -24,7 +26,7 @@ export default function LoginForm() {
                 }
             }).then(() => {
                 toast.success("Logged in successfully");
-                currentUser.refetch();
+                qc.invalidateQueries($api.queryOptions("get", "/users/current"));
             }).catch(() => {
                 toast.error("Wrong credentials");
             });

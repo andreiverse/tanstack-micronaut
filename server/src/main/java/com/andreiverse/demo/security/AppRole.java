@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.andreiverse.http.common.security.authorization.Role;
+
 import lombok.Getter;
 
 @Getter
-public enum AppRole implements com.andreiverse.http.common.security.authorization.Role {
+public enum AppRole implements Role {
         ADMIN(
                         AppPermission.ARTICLE_READ,
                         AppPermission.ARTICLE_WRITE,

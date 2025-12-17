@@ -1,4 +1,4 @@
-package com.andreiverse.http.common.security;
+package com.andreiverse.http.common.service;
 
 import com.andreiverse.http.common.entity.BaseUserDetailsEntity;
 import com.andreiverse.http.common.entity.UserEntity;
@@ -29,4 +29,23 @@ public abstract class AbstractUserDetailsService<T extends BaseUserDetailsEntity
                 .orElseGet(() -> this.createAndSaveUserDetails(userEntity));
     }
 
+    public T updateUserDetails(UserEntity userEntity, T userDetails) {
+        if (userEntity == null) {
+            throw new IllegalArgumentException("User entity cannot be null");
+        }
+
+        if (userDetails == null) {
+            throw new IllegalArgumentException("User details cannot be null");
+        }
+
+        return this.repository.save(userDetails);
+    }
+
+    public void deleteUserDetails(UserEntity userEntity) {
+        if (userEntity == null) {
+            throw new IllegalArgumentException("User entity cannot be null");
+        }
+
+        this.repository.deleteByUserId(userEntity.getId());
+    }
 }

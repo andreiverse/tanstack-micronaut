@@ -22,7 +22,8 @@ public class UserDetailsController {
     @Get("/current")
     @Secured(SecurityRule.IS_AUTHENTICATED)
     public UserDetailsEntity getCurrentUserDetails(Authentication authentication) {
-        UserEntity userEntity = this.userService.findByEmail(authentication.getName()).orElseThrow();
+        UserEntity userEntity = this.userService.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         return this.appUserDetailsService.getUserDetails(userEntity);
     }
