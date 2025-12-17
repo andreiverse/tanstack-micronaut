@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import io.micronaut.serde.annotation.Serdeable;
 import io.micronaut.serde.annotation.Serdeable.Serializable;
 
 @Entity
@@ -37,10 +36,6 @@ public class RoleEntity {
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "roles_permissions",
-        joinColumns = @JoinColumn(name = "role_id"),
-        inverseJoinColumns = @JoinColumn(name = "permission_name")
-    )
+    @JoinTable(name = "roles_permissions", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_name"))
     private List<PermissionEntity> permissions;
 }

@@ -1,7 +1,9 @@
 package com.andreiverse.http.common;
 
 import com.andreiverse.http.common.security.authorization.PermissionSeeder;
+import com.andreiverse.http.common.security.authorization.RoleSeeder;
 
+import io.micronaut.context.event.ApplicationEventListener;
 import io.micronaut.context.event.StartupEvent;
 
 import jakarta.inject.Singleton;
@@ -9,12 +11,14 @@ import lombok.RequiredArgsConstructor;
 
 @Singleton
 @RequiredArgsConstructor
-public class CommonServerInitializer implements io.micronaut.context.event.ApplicationEventListener<StartupEvent> {
+public class CommonServerInitializer implements ApplicationEventListener<StartupEvent> {
     private final PermissionSeeder permissionSeeder;
+    private final RoleSeeder roleSeeder;
     private final CommonServerConfig commonServerConfig;
 
     @Override
     public void onApplicationEvent(StartupEvent event) {
         permissionSeeder.seed(commonServerConfig.getPermissions());
+        roleSeeder.seed(commonServerConfig.getRoles());
     }
 }
