@@ -1,10 +1,27 @@
 micronaut:
   server:
+    host: 0.0.0.0
+    port: 8080
     cors:
       enabled: true
       configurations:
         ui:
-          allowed-origins: "http://localhost:3000"
+          allowed-origins:
+            - "http://localhost:3000"
+            - "http://172.21.70.146:3000"
+          allowed-methods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - OPTIONS
+          allowed-headers:
+            - Content-Type
+            - Authorization
+          exposed-headers:
+            - Set-Cookie
+          allow-credentials: true
+          max-age: 3600
   security:
     intercept-url-map:
       - pattern: "/**"
@@ -30,6 +47,9 @@ micronaut:
         enabled: true
         namespace: 'micronaut:session'
         write-mode: BACKGROUND
+      cookie: true
+      cookie-http-only: false
+      cookie-path: "/"
   serde:
     serialization:
       inclusion: ALWAYS
@@ -54,4 +74,5 @@ jpa:
       hibernate:    
         hbm2ddl:
           auto: none
-
+        order_by:
+          default_null_ordering: last

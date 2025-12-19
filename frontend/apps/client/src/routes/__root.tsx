@@ -18,7 +18,9 @@ import $api from '@/lib/api/client'
 
 interface MyRouterContext {
   queryClient: QueryClient,
-  user: components["schemas"]["UserEntity"] | null
+  user: components["schemas"]["UserEntity"] | null,
+  roles: string[],
+  isAdmin: boolean
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
@@ -29,8 +31,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       context.queryClient.setQueryData($api.queryOptions("get", "/users/current").queryKey, user)
     }
 
+    const roles = user?.roles?.map(role => role.name || '') || []
+    const isAdmin = roles.includes('ADMIN')
+
     return {
-      user
+      user,
+      roles,
+      isAdmin
     }
   },
   head: () => ({

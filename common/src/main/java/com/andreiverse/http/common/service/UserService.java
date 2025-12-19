@@ -13,6 +13,8 @@ import com.andreiverse.http.common.repository.UserRepository;
 import com.andreiverse.http.common.security.authentication.PasswordEncoder;
 import com.andreiverse.http.common.security.authorization.Role;
 
+import io.micronaut.data.model.Page;
+import io.micronaut.data.model.Pageable;
 import jakarta.inject.Singleton;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,10 @@ public class UserService {
 
     public Optional<UserEntity> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public Page<UserEntity> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     public UserEntity register(UserRegistrationRequest userRegistrationRequest) {

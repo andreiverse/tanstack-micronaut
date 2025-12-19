@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.andreiverse.http.common.security.authorization.CommonPermission;
+import com.andreiverse.http.common.security.authorization.Permission;
 import com.andreiverse.http.common.security.authorization.Role;
 
 import lombok.Getter;
@@ -11,18 +13,19 @@ import lombok.Getter;
 @Getter
 public enum AppRole implements Role {
         ADMIN(
-                        AppPermission.ARTICLE_READ,
-                        AppPermission.ARTICLE_WRITE,
-                        AppPermission.USER_READ,
-                        AppPermission.USER_WRITE),
+                        AppPermission.TEST_PERMISSION,
+                        CommonPermission.CREATE_USERS,
+                        CommonPermission.DELETE_ALL_USERS,
+                        CommonPermission.EDIT_ALL_USERS,
+                        CommonPermission.VIEW_ALL_USERS),
         MEMBER(
-                        AppPermission.ARTICLE_READ);
+                        AppPermission.TEST_PERMISSION);
 
         private final List<String> permissions;
 
-        AppRole(AppPermission... permissions) {
+        AppRole(Permission... permissions) {
                 this.permissions = Arrays.stream(permissions)
-                                .map(AppPermission::getName)
+                                .map(Permission::getName)
                                 .collect(Collectors.toList());
         }
 

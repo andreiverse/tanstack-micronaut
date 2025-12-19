@@ -6,9 +6,15 @@ export const authMiddleware = createMiddleware().server(async ({ next, request }
         headers: request.headers
     })
 
+    const user = (!error && data) ? data : null;
+    const roles = user?.roles?.map(role => role.name) || [];
+    const isAdmin = roles.includes('ADMIN');
+
     return next({
         context: {
-            user: (!error && data) ? data : null,
+            user,
+            roles,
+            isAdmin,
         },
     })
 })

@@ -3,10 +3,7 @@ package com.andreiverse.demo.security;
 import com.andreiverse.http.common.security.authorization.Permission;
 
 public enum AppPermission implements Permission {
-    ARTICLE_READ("ARTICLE_READ"),
-    ARTICLE_WRITE("ARTICLE_WRITE"),
-    USER_READ("USER_READ"),
-    USER_WRITE("USER_WRITE");
+    TEST_PERMISSION("TEST_PERMISSION");
 
     private final String name;
 

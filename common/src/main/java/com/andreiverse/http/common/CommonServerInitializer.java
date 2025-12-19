@@ -1,5 +1,8 @@
 package com.andreiverse.http.common;
 
+import java.util.List;
+
+import com.andreiverse.http.common.security.authorization.CommonPermission;
 import com.andreiverse.http.common.security.authorization.PermissionSeeder;
 import com.andreiverse.http.common.security.authorization.RoleSeeder;
 
@@ -18,6 +21,7 @@ public class CommonServerInitializer implements ApplicationEventListener<Startup
 
     @Override
     public void onApplicationEvent(StartupEvent event) {
+        permissionSeeder.seed(List.of(CommonPermission.values()));
         permissionSeeder.seed(commonServerConfig.getPermissions());
         roleSeeder.seed(commonServerConfig.getRoles());
     }

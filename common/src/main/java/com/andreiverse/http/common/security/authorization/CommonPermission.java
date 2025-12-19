@@ -9,7 +9,7 @@ public enum CommonPermission implements Permission {
     VIEW_ALL_USERS("VIEW_ALL_USERS"),
     EDIT_ALL_USERS("EDIT_ALL_USERS"),
     CREATE_USERS("CREATE_USERS"),
-    DELETE_USERS("DELETE_USERS");
+    DELETE_ALL_USERS("DELETE_ALL_USERS");
 
     private final String name;
 

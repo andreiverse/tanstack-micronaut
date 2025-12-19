@@ -6,10 +6,10 @@ import java.util.UUID;
 import com.andreiverse.http.common.entity.UserEntity;
 
 import io.micronaut.data.annotation.Repository;
-import io.micronaut.data.repository.CrudRepository;
+import io.micronaut.data.repository.PageableRepository;
 
 @Repository
-public interface UserRepository extends CrudRepository<UserEntity, UUID> {
+public interface UserRepository extends PageableRepository<UserEntity, UUID> {
 
     Optional<UserEntity> findByEmail(String email);
 

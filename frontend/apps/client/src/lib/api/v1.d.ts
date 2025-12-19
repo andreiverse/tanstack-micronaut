@@ -123,7 +123,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        get: operations["getAllUsers"];
         put?: never;
         post: operations["register"];
         delete?: never;
@@ -160,6 +160,22 @@ export interface components {
             /** Format: uuid */
             userId?: string;
         };
+        Page_UserEntity_: components["schemas"]["Slice_UserEntity_"] & {
+            /** Format: int64 */
+            totalSize?: number;
+            /** Format: int32 */
+            totalPages?: number;
+        };
+        Pageable: components["schemas"]["Sort"] & {
+            /** Format: int32 */
+            number?: number;
+            /** Format: int32 */
+            size: number;
+            mode?: components["schemas"]["Pageable.Mode"];
+            sort: components["schemas"]["Sort"];
+        };
+        /** @enum {string} */
+        "Pageable.Mode": "CURSOR_NEXT" | "CURSOR_PREVIOUS" | "OFFSET";
         PermissionEntity: {
             name: string;
         };
@@ -174,6 +190,30 @@ export interface components {
             name?: string;
             permissions?: components["schemas"]["PermissionEntity"][];
         };
+        Slice_UserEntity_: {
+            content: components["schemas"]["UserEntity"][];
+            pageable: components["schemas"]["Pageable"];
+            /** Format: int32 */
+            pageNumber?: number;
+            /** Format: int64 */
+            offset?: number;
+            /** Format: int32 */
+            size?: number;
+            empty?: boolean;
+            /** Format: int32 */
+            numberOfElements?: number;
+        };
+        Sort: {
+            orderBy: components["schemas"]["Sort.Order"][];
+        };
+        "Sort.Order": {
+            ignoreCase: boolean;
+            direction: components["schemas"]["Sort.Order.Direction"];
+            property: string;
+            ascending?: boolean;
+        };
+        /** @enum {string} */
+        "Sort.Order.Direction": "ASC" | "DESC";
         UserDetailsEntity: components["schemas"]["BaseUserDetailsEntity"] & {
             description?: string;
         };
@@ -409,6 +449,39 @@ export interface operations {
             };
         };
     };
+    getAllUsers: {
+        parameters: {
+            query: {
+                page: number;
+                size: number;
+                sort?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description getAllUsers 200 response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_UserEntity_"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorResponse"];
+                };
+            };
+        };
+    };
     register: {
         parameters: {
             query?: never;
@@ -422,8 +495,8 @@ export interface operations {
             };
         };
         responses: {
-            /** @description register 200 response */
-            200: {
+            /** @description register 201 response */
+            201: {
                 headers: {
                     [name: string]: unknown;
                 };

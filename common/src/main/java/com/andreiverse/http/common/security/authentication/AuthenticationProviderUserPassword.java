@@ -11,6 +11,8 @@ import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.reactivestreams.Publisher;
@@ -38,15 +40,10 @@ public class AuthenticationProviderUserPassword<B> implements HttpRequestReactiv
             if (userEntityOptional.isPresent()) {
                 UserEntity userEntity = userEntityOptional.get();
                 if (passwordEncoder.matches(authenticationRequest.getSecret(), userEntity.getHashedPassword())) {
-                    // Flatten Roles and Permissions into a single list of strings
-                    java.util.List<String> authorities = new java.util.ArrayList<>();
-
+                    List<String> authorities = new ArrayList<>();
                     if (userEntity.getRoles() != null) {
                         for (com.andreiverse.http.common.entity.RoleEntity role : userEntity.getRoles()) {
-                            // Add Role Name (e.g. "ROLE_ADMIN")
-                            authorities.add("ROLE_" + role.getName()); // Standard convention, but customizable
-
-                            // Add Permissions (e.g. "ARTICLE_WRITE")
+                            authorities.add("ROLE_" + role.getName());
                             if (role.getPermissions() != null) {
                                 for (com.andreiverse.http.common.entity.PermissionEntity perm : role.getPermissions()) {
                                     authorities.add(perm.getName());
@@ -59,12 +56,12 @@ public class AuthenticationProviderUserPassword<B> implements HttpRequestReactiv
                             AuthenticationResponse.success((String) authenticationRequest.getIdentity(), authorities));
                     emitter.complete();
                 } else {
-                    // not found for wrong password
-                    emitter.error(AuthenticationResponse.exception(AuthenticationFailureReason.USER_NOT_FOUND));
+                    emitter.next(AuthenticationResponse.failure(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH));
+                    emitter.complete();
                 }
             } else {
-                // not found for wrong user
-                emitter.error(AuthenticationResponse.exception(AuthenticationFailureReason.USER_NOT_FOUND));
+                emitter.next(AuthenticationResponse.failure(AuthenticationFailureReason.USER_NOT_FOUND));
+                emitter.complete();
             }
         }, FluxSink.OverflowStrategy.ERROR);
     }
