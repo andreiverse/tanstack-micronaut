@@ -228,8 +228,8 @@ export interface components {
             roles: components["schemas"]["RoleEntity"][];
         };
         UserRegistrationRequest: {
-            email?: string;
-            password?: string;
+            email: string;
+            password: string;
         };
         UsernamePasswordCredentials: {
             username: string | null;
