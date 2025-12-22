@@ -7,6 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:e2e": "VITE_REAL_BACKEND=true vitest run",
     "production": "node .output/server/index.mjs",
     "generate-types": "pnpm dlx openapi-typescript ../../../server/target/classes/META-INF/swagger/server-1.0.0.yml -o ./src/lib/api/v1.d.ts"
   },
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@tanstack/devtools-vite": "^0.3.11",
     "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.2.0",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
@@ -50,6 +52,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "^1.0.0",
     "jsdom": "^27.0.0",
+    "msw": "^2.12.4",
     "openapi-typescript": "^7.10.1",
     "typescript": "^5.7.2",
     "vite": "^7.1.7",

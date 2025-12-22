@@ -10,7 +10,8 @@ export const serverFetchClient = createFetchClient<paths>({
 
 const fetchClient = createFetchClient<paths>({
     baseUrl: CLIENT_API_BASE_URL,
-    credentials: "include"
+    credentials: "include",
+    fetch: (input: RequestInfo | URL, init?: RequestInit) => fetch(input, init)
 });
 
 const $api = createClient(fetchClient);
