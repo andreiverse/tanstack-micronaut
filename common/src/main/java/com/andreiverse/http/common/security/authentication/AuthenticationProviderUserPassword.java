@@ -17,6 +17,8 @@ import java.util.Optional;
 
 import org.reactivestreams.Publisher;
 
+import com.andreiverse.http.common.entity.PermissionEntity;
+import com.andreiverse.http.common.entity.RoleEntity;
 import com.andreiverse.http.common.entity.UserEntity;
 import com.andreiverse.http.common.service.UserService;
 
@@ -34,35 +36,51 @@ public class AuthenticationProviderUserPassword<B> implements HttpRequestReactiv
     public Publisher<AuthenticationResponse> authenticate(
             @Nullable HttpRequest<B> httpRequest,
             @NonNull AuthenticationRequest<String, String> authenticationRequest) {
-        log.info("Authentication request: {}", authenticationRequest.getIdentity());
-        return Flux.create(emitter -> {
-            Optional<UserEntity> userEntityOptional = userService.findByEmail(authenticationRequest.getIdentity());
-            if (userEntityOptional.isPresent()) {
-                UserEntity userEntity = userEntityOptional.get();
-                if (passwordEncoder.matches(authenticationRequest.getSecret(), userEntity.getHashedPassword())) {
-                    List<String> authorities = new ArrayList<>();
-                    if (userEntity.getRoles() != null) {
-                        for (com.andreiverse.http.common.entity.RoleEntity role : userEntity.getRoles()) {
-                            authorities.add("ROLE_" + role.getName());
-                            if (role.getPermissions() != null) {
-                                for (com.andreiverse.http.common.entity.PermissionEntity perm : role.getPermissions()) {
-                                    authorities.add(perm.getName());
-                                }
-                            }
-                        }
-                    }
+        log.info("Received authentication request for: {}", authenticationRequest.getIdentity());
 
-                    emitter.next(
-                            AuthenticationResponse.success((String) authenticationRequest.getIdentity(), authorities));
-                    emitter.complete();
-                } else {
-                    emitter.next(AuthenticationResponse.failure(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH));
-                    emitter.complete();
-                }
-            } else {
-                emitter.next(AuthenticationResponse.failure(AuthenticationFailureReason.USER_NOT_FOUND));
-                emitter.complete();
-            }
+        return Flux.create(emitter -> {
+            resolveAuthentication(authenticationRequest, emitter);
         }, FluxSink.OverflowStrategy.ERROR);
     }
+
+    void resolveAuthentication(AuthenticationRequest<String, String> authenticationRequest,
+            FluxSink<AuthenticationResponse> emitter) {
+        Optional<UserEntity> userEntityOptional = userService.findByEmail(authenticationRequest.getIdentity());
+
+        if (userEntityOptional.isEmpty()) {
+            emitter.next(AuthenticationResponse.failure(AuthenticationFailureReason.USER_NOT_FOUND));
+            emitter.complete();
+            return;
+        }
+
+        UserEntity userEntity = userEntityOptional.get();
+        if (passwordEncoder.matches(authenticationRequest.getSecret(), userEntity.getHashedPassword())) {
+            emitter.next(AuthenticationResponse.success(
+                    (String) authenticationRequest.getIdentity(),
+                    getAuthorities(userEntity)));
+            emitter.complete();
+        } else {
+            emitter.next(AuthenticationResponse.failure(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH));
+            emitter.complete();
+        }
+    }
+
+    private List<String> getAuthorities(UserEntity userEntity) {
+        List<String> authorities = new ArrayList<>();
+        if (userEntity.getRoles() == null) {
+            return authorities;
+        }
+
+        for (RoleEntity role : userEntity.getRoles()) {
+            authorities.add("ROLE_" + role.getName());
+            if (role.getPermissions() != null) {
+                for (PermissionEntity perm : role.getPermissions()) {
+                    authorities.add(perm.getName());
+                }
+            }
+        }
+
+        return authorities;
+    }
+
 }
