@@ -6,6 +6,32 @@ micronaut:
     http:
       redis:
         enabled: false
+      cookie: true
+      cookie-http-only: false
+      cookie-path: "/"
+  security:
+    intercept-url-map:
+      - pattern: "/login"
+        http-method: POST
+        access:
+          - isAnonymous()
+      - pattern: "/**"
+        http-method: OPTIONS
+        access:
+          - isAnonymous()
+    enabled: true
+    redirect:
+      login-success: /security/success
+      login-failure: /security/failure
+      logout: /security/failure
+    authentication: session
+    basic-auth:
+      enabled: false
+
+  serde:
+    serialization:
+      inclusion: ALWAYS
+
 
 flyway:
   datasources:

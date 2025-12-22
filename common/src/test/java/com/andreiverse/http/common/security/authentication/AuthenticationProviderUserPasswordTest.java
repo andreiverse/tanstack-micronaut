@@ -20,10 +20,9 @@ import io.micronaut.security.authentication.AuthenticationFailed;
 import io.micronaut.security.authentication.AuthenticationFailureReason;
 import io.micronaut.security.authentication.AuthenticationRequest;
 import io.micronaut.security.authentication.AuthenticationResponse;
-import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-class AuthenticationTest {
+class AuthenticationProviderUserPasswordTest {
 
     private AuthenticationProviderUserPassword<Object> authenticationProvider;
     private PasswordEncoder passwordEncoder;
