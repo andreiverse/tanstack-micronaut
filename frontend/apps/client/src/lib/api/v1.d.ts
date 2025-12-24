@@ -152,11 +152,8 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        ApiErrorResponse: {
-            exception: string;
-            message: string;
-        };
         BaseUserDetailsEntity: {
+            user?: components["schemas"]["UserEntity"];
             /** Format: uuid */
             userId?: string;
         };
@@ -174,15 +171,14 @@ export interface components {
             mode?: components["schemas"]["Pageable.Mode"];
             sort: components["schemas"]["Sort"];
         };
-        /** @enum {string} */
-        "Pageable.Mode": "CURSOR_NEXT" | "CURSOR_PREVIOUS" | "OFFSET";
+        "Pageable.Mode": Record<string, never>;
         PermissionEntity: {
             name: string;
         };
         PingResponse: {
-            ok: boolean;
             /** Format: date-time */
             timestamp: string;
+            ok: boolean;
         };
         RoleEntity: {
             /** Format: uuid */
@@ -218,25 +214,20 @@ export interface components {
             description?: string;
         };
         UserEntity: {
-            /** Format: uuid */
-            id?: string | null;
             /** Format: date-time */
             createdAt: string;
+            email: string;
+            /** Format: uuid */
+            id?: string | null;
+            roles: components["schemas"]["RoleEntity"][];
             /** Format: date-time */
             updatedAt: string;
-            email: string;
-            roles: components["schemas"]["RoleEntity"][];
         };
         UserRegistrationRequest: {
             email: string;
             password: string;
         };
-        UsernamePasswordCredentials: {
-            username: string | null;
-            password: string | null;
-            identity?: string | null;
-            secret?: string | null;
-        };
+        UsernamePasswordCredentials: Record<string, never>;
     };
     responses: never;
     parameters: never;
@@ -349,15 +340,6 @@ export interface operations {
                     "application/json": components["schemas"]["PingResponse"];
                 };
             };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
         };
     };
     failureAuthentication: {
@@ -375,15 +357,6 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
             };
         };
     };
@@ -407,15 +380,6 @@ export interface operations {
                     };
                 };
             };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
         };
     };
     successAuthentication: {
@@ -436,15 +400,6 @@ export interface operations {
                     "application/json": {
                         [key: string]: Record<string, never>;
                     };
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
         };
@@ -471,15 +426,6 @@ export interface operations {
                     "application/json": components["schemas"]["Page_UserEntity_"];
                 };
             };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
         };
     };
     register: {
@@ -504,15 +450,6 @@ export interface operations {
                     "application/json": components["schemas"]["UserEntity"];
                 };
             };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
-                };
-            };
         };
     };
     getCurrentUser: {
@@ -531,15 +468,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UserEntity"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ApiErrorResponse"];
                 };
             };
         };

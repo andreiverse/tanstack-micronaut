@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.reactivestreams.Publisher;
 
 import com.andreiverse.http.common.entity.RoleEntity;
@@ -27,6 +28,9 @@ class AuthenticationProviderUserPasswordTest {
     private AuthenticationProviderUserPassword<Object> authenticationProvider;
     private PasswordEncoder passwordEncoder;
     private UserService userService;
+
+    @Mock
+    private AuthenticationRequest<String, String> authenticationRequest;
 
     @BeforeEach
     void setUp() {
@@ -51,11 +55,11 @@ class AuthenticationProviderUserPasswordTest {
         when(userService.findByEmail(email)).thenReturn(Optional.of(userEntity));
         when(passwordEncoder.matches(password, hashedPassword)).thenReturn(true);
 
-        AuthenticationRequest<String, String> request = mock(AuthenticationRequest.class);
-        when(request.getIdentity()).thenReturn(email);
-        when(request.getSecret()).thenReturn(password);
+        when(authenticationRequest.getIdentity()).thenReturn(email);
+        when(authenticationRequest.getSecret()).thenReturn(password);
 
-        Publisher<AuthenticationResponse> responsePublisher = authenticationProvider.authenticate(null, request);
+        Publisher<AuthenticationResponse> responsePublisher = authenticationProvider.authenticate(null,
+                authenticationRequest);
 
         StepVerifier.create(responsePublisher)
                 .assertNext(response -> {
@@ -79,11 +83,11 @@ class AuthenticationProviderUserPasswordTest {
         when(userService.findByEmail(email)).thenReturn(Optional.of(userEntity));
         when(passwordEncoder.matches(password, hashedPassword)).thenReturn(false);
 
-        AuthenticationRequest<String, String> request = mock(AuthenticationRequest.class);
-        when(request.getIdentity()).thenReturn(email);
-        when(request.getSecret()).thenReturn(password);
+        when(authenticationRequest.getIdentity()).thenReturn(email);
+        when(authenticationRequest.getSecret()).thenReturn(password);
 
-        Publisher<AuthenticationResponse> responsePublisher = authenticationProvider.authenticate(null, request);
+        Publisher<AuthenticationResponse> responsePublisher = authenticationProvider.authenticate(null,
+                authenticationRequest);
 
         StepVerifier.create(responsePublisher)
                 .assertNext(response -> {
@@ -102,11 +106,11 @@ class AuthenticationProviderUserPasswordTest {
 
         when(userService.findByEmail(email)).thenReturn(Optional.empty());
 
-        AuthenticationRequest<String, String> request = mock(AuthenticationRequest.class);
-        when(request.getIdentity()).thenReturn(email);
-        when(request.getSecret()).thenReturn(password);
+        when(authenticationRequest.getIdentity()).thenReturn(email);
+        when(authenticationRequest.getSecret()).thenReturn(password);
 
-        Publisher<AuthenticationResponse> responsePublisher = authenticationProvider.authenticate(null, request);
+        Publisher<AuthenticationResponse> responsePublisher = authenticationProvider.authenticate(null,
+                authenticationRequest);
 
         StepVerifier.create(responsePublisher)
                 .assertNext(response -> {
