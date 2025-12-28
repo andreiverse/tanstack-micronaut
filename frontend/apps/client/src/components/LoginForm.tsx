@@ -27,7 +27,8 @@ export default function LoginForm() {
             }).then(() => {
                 toast.success("Logged in successfully");
                 qc.invalidateQueries($api.queryOptions("get", "/users/current"));
-            }).catch(() => {
+            }).catch((e) => {
+                console.log(e);
                 toast.error("Wrong credentials");
             });
         }}>Login</Button>

@@ -1,6 +1,7 @@
 package com.andreiverse.http.common.security.authentication;
 
 import java.util.List;
+import java.util.Map;
 
 import io.micronaut.context.annotation.Replaces;
 import jakarta.inject.Singleton;
@@ -40,9 +41,10 @@ public class AppLoginHandler implements LoginHandler<HttpRequest<?>, MutableHttp
     }
 
     @Override
-    public MutableHttpResponse<?> loginSuccess(Authentication authentication, HttpRequest<?> request) {
+    public MutableHttpResponse<Map<String, Object>> loginSuccess(Authentication authentication,
+            HttpRequest<?> request) {
         saveAuthenticationInSession(authentication, request);
-        return HttpResponse.ok("Login successful");
+        return HttpResponse.ok(Map.of("message", "Login successful"));
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+
 import org.reactivestreams.Publisher;
 
 import com.andreiverse.http.common.entity.RoleEntity;
@@ -29,13 +29,13 @@ class AuthenticationProviderUserPasswordTest {
     private PasswordEncoder passwordEncoder;
     private UserService userService;
 
-    @Mock
     private AuthenticationRequest<String, String> authenticationRequest;
 
     @BeforeEach
     void setUp() {
         passwordEncoder = mock(PasswordEncoder.class);
         userService = mock(UserService.class);
+        authenticationRequest = mock(AuthenticationRequest.class);
         authenticationProvider = new AuthenticationProviderUserPassword<>(passwordEncoder, userService);
     }
 
